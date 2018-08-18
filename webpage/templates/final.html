@@ -1,0 +1,268 @@
+<html>
+<title>CAMERA DETECTION</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+<head>
+<script>
+  var myVar;
+
+function myFunction() {
+    myVar = setInterval(GenerateTable, 1000);
+}
+function sortTable(){
+    var table, rows, switching, i, x, y, shouldSwitch,w,t;
+  table = document.getElementById("#myTable");
+  switching = true;
+  while (switching) {
+    switching = false;
+    rows = table.getElementsByTagName("tr");
+      shouldSwitch = false;
+      x = rows[i].getElementsByTagName("td")[0];
+      y = rows[i + 1].getElementsByTagName("td")[0];
+      console.log("hai"+x);
+      if (x.innerHTML.toTimeString() > y.innerHTML.toTimeString()) {
+        shouldSwitch = true;
+        break;
+      }
+    }
+      rows[i].parentNode.insertBefore(rows[i + 1], rows[i]);
+      switching = true;
+    }
+function GenerateTable() {
+      $.get("/api", function(data){
+      var obj=JSON.parse(data);
+
+      var node=document.getElementById("showData");
+      while (node.hasChildNodes()) {
+          node.removeChild(node.lastChild);
+      }
+
+
+      $('#showData').append('<table id="myTable"></table>');
+      var Table=$('#showData').children();
+      Table.append("<th>IN TIME</th><th>OUT TIME</th><th>PRIVATE HIRE</th><th>NO PLATE</th><th>STATUS</th>");
+        for(var i=0;i<obj.length;i++){
+          var obj1=obj[i];
+          var color1="white";
+          if(obj1.status=="Expired"){
+                color1="red";
+                Table.append("<tr bgcolor="+color1+"><td>" + obj1.intime  +"</td><td>" + obj1.outtime + "</td><td>" + obj1.vehicletype + "</td><td>" + obj1.noplate + "</td><td>" + obj1.status + "</td></tr>");  
+                      
+          }  
+          else{
+            Table.append("<tr bgcolor="+color1+"><td>" + obj1.intime  +"</td><td>" + obj1.outtime + "</td><td>" + obj1.vehicletype + "</td><td>" + obj1.noplate + "</td><td>" + obj1.status + "</td></tr>"); 
+            
+          }
+
+              
+  }
+    
+    });
+  }
+ 
+</script>
+<style>
+* {
+    box-sizing: border-box;
+}
+table{
+  font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
+    border-collapse: collapse;
+    /*overflow: auto;*/
+    width: 95%;
+}
+th, td 
+        {
+            border: 1px solid #ddd;
+            padding: 8px;
+        }
+        th {
+            padding-top: 12px;
+            padding-bottom: 12px;
+            text-align: left;
+            background-color: #4CAF50;
+            color: white;
+      }
+/*tr:{background-color: #f2f2f2;}
+tr:hover {background-color: #f2f2f2;}
+tr.1:{background-color: #FF0000}*/
+p1   { 
+	 font-size: 30px;
+	 font-family: "Times New Roman", Times, serif;
+	 color: white;
+	}
+p2   { 
+	 font-size: 20px;
+	 font-family: "Times New Roman", Times, serif;
+	 color: white;
+	}
+p3   { 
+	 font-size: 20px;
+	 font-family: "Times New Roman", Times, serif;
+	 color: white;
+	}
+body {
+    font-family: Arial, Helvetica, sans-serif;
+}
+#showData{
+  height:90%;
+  overflow: auto;
+}
+.topnav {
+  overflow: hidden;
+  background-color: #333;
+}
+
+.topnav a {
+  float: left;
+  color: #f2f2f2;
+  text-align: center;
+  padding: 14px 16px;
+  text-decoration: none;
+  font-size: 17px;
+}
+
+.topnav a:hover {
+  background-color: #ddd;
+  color: black;
+}
+
+.topnav a.active {
+  background-color: #4CAF50;
+  color: white;
+}
+
+header {
+    background-color: #666;
+    padding-top: 0.4%;
+    padding-bottom: 0.4%;
+    text-align: left;
+    font-size: 35px;
+    color: white;
+}
+
+section {
+    display: -webkit-flex;
+    display: flex;
+}
+
+
+article1 {
+    -webkit-flex: 3;
+    -ms-flex: 3;
+    flex: 3;
+    background-color: #4CAF50;
+    padding-bottom:2%;
+}
+
+article2 {
+    -webkit-flex: 3;
+    -ms-flex: 3;
+    flex: 3;
+    background-color: gray;
+}
+
+/* Style the footer */
+footer {
+    background-color: #777;
+    padding-top: 0.2%;
+    padding-bottom: 0.2%;
+    text-align: center;
+    color: white;
+}
+.container{
+width:100%;
+}
+.nav-pills > .active > a, .nav-pills > .active > a:hover {
+    background-color: red;
+}
+.tab-content{
+
+}
+
+/* Responsive layout - makes the menu and the content (inside the section) sit on top of each other instead of next to each other */
+@media (max-width: 600px) {
+    section {
+      -webkit-flex-direction: column;
+      flex-direction: column;
+    }
+@media (min-width: 100px) {
+    .container{
+        max-width: 50px;
+    }
+}
+}
+#customers {
+    font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
+    border-collapse: collapse;
+    
+    width: 95%;
+}
+
+#customers td, #customers th {
+    border: 1px solid #ddd;
+    padding: 8px;
+}
+
+
+
+
+
+#customers th {
+    padding-top: 12px;
+    padding-bottom: 12px;
+    text-align: left;
+    background-color: #4CAF50;
+    color: white;
+}
+</style>
+</head>
+<body onload="myFunction()">
+<header>
+  <p1>CAMERA DETECTION</p1>
+</header>
+<div class="topnav">
+  <a class="active" href="#privatehire">Private hire</a>
+  <!--<a href="#person">Person</a>
+  <a href="#about">About</a> -->
+</div>
+<section>
+<article1>
+<div class="container">
+  <ul class="nav nav-pills nav-justified">
+    <li class="active"><a data-toggle="pill" href="#incam">IN CAM</a></li>
+    <li><a data-toggle="pill" href="#outcam">OUT CAM</a></li>
+    <li><a data-toggle="pill" href="#privatecam">PRIVATE CAM</a></li>
+  </ul>
+  
+  <div class="tab-content" >
+    <div id="incam" class="tab-pane fade in active">
+      <img id="bg" src="{{ url_for('in_cam') }}" height="600" width="800">
+    </div>
+    <div id="outcam" class="tab-pane fade">
+      <img id="bg" src="{{ url_for('out_cam') }}" height="600" width="800">
+    </div>
+    <div id="privatecam" class="tab-pane fade">
+      <img id="bg" src="{{ url_for('private_cam') }}" height="600" width="800">
+    </div>
+  </div>
+</div>
+ </article1>
+  <article2>
+<p style="color:white;font-size:200%;text-align:center;" color="white">DATA<p>
+<div id="showData" align="center">
+    </article2>
+</section>
+
+<footer>
+  <p2>Powered by Katomaran technologies and business solutions</p2>
+</footer>
+
+</body>
+</html>

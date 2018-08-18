@@ -1,0 +1,94 @@
+<html>
+  <head>
+    <title>CAMERA DETECTION</title>
+
+  </head>
+  <body>
+     <h1> HELLO</h1>
+     <style>
+	h1   {color: white;}
+	table, th, td {
+	    border: 1px solid black;
+	    border-collapse: collapse;
+	    background-color: #f1f1c1;
+	}
+	.tab {
+	    overflow: hidden;
+	    border: 1px solid #ccc;
+	    background-color: #f1f1f1;
+	}
+
+	 /* Split the screen in half */
+	.split {
+	  height: 100%;
+	  /*width: 70%;*/
+	  position: fixed;
+	  z-index: 1;
+	  top: 0;
+	  overflow-x: hidden;
+	  padding-top: 20px;
+	}
+
+	/* Control the left side */
+	.left {
+	  left: 0;
+	  width: 55%;
+	  /*background-color: #111;*/
+	}
+
+	/* Control the right side */
+	.right {
+	  right: 0;
+	  width: 45%;
+	 /* background-color: red;*/
+	}
+
+	/* If you want the content centered horizontally and vertically */
+	.centered {
+	  position: absolute;
+	  top: 50%;
+	  left: 50%;
+	  transform: translate(-50%, -50%);
+	  text-align: center;
+	} 
+	.centered1 {
+	  position: absolute;
+	  top: 17%;
+	  left: 26%;
+	  transform: translate(-50%, -50%);
+	  text-align: center;
+	} 
+    </style>
+     <div class="split left">
+      <h1>LIVE STREAMING</h1>
+      <div class="centered">
+        <img id="bg" src="{{ url_for('video_feed') }}" width="800" height="600">
+      </div>
+     </div>
+
+     <div class="split right">
+	<h1>PRIVATE HIRE DETECTION</h1>
+	<div class="centered1">
+	 <br>
+	 <table width="200%">
+	  <tr>
+	    <th width="10%">S.NO</th>
+	    <th width="50%">NUMBER PLATE</th>
+	    <th width="40%">PRIVATE HIRE</th>
+	  </tr>
+	  <tr>
+	    <td>1.</td>
+	    <td>TN675757</td>
+	    <td>YES</td>
+	  </tr>
+	  <tr>
+	    <td>2.</td>
+	    <td>TN87979</td>
+	    <td>NO</td>
+	  </tr>
+	</table>
+	</div> 
+     </div>
+    
+  </body>
+</html>
