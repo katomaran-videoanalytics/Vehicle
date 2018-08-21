@@ -8,7 +8,7 @@ CLASSES = ["background", "aeroplane", "bicycle", "bird", "boat",
 COLORS = np.random.uniform(0, 255, size=(len(CLASSES), 3))
 net = cv2.dnn.readNetFromCaffe("models/Car_Detect_Model/MobileNetSSD_deploy.prototxt.txt", "models/Car_Detect_Model/MobileNetSSD_deploy.caffemodel")
 
-cap1 = cv2.VideoCapture("rtsp://admin:admin0864@121.6.207.205:8081/cam/realmonitor?channel=1&subtype=1")
+cap1 = cv2.VideoCapture("rtsp://admin:admin0864@121.6.207.205:8083/cam/realmonitor?channel=1&subtype=1")
 
 j=0
 while cap1.isOpened():

@@ -2,9 +2,12 @@ import cv2 as cv
 
 cvNet = cv.dnn.readNetFromTensorflow('models/PrivateHire_Model/frozen_inference_graph.pb', 'models/PrivateHire_Model/private_model.pbtxt')
 
+cap1 = cv.VideoCapture(0)
 
-def private_detect(frame):
-	img = frame.read()
+
+
+while True:
+	ret,img = cap1.read()
 	rows = img.shape[0]
 	cols = img.shape[1]
 	cvNet.setInput(cv.dnn.blobFromImage(img, 1.0/127.5, (300, 300), (127.5, 127.5, 127.5), swapRB=True, crop=False))
@@ -12,6 +15,12 @@ def private_detect(frame):
 	for detection in cvOut[0,0,:,:]:
 		score = float(detection[2])
 		if score > 0.9:
-			return True
-	return False
+			left = detection[3] * cols
+			top = detection[4] * rows
+			right = detection[5] * cols
+			bottom = detection[6] * rows
+			cv.rectangle(img, (int(left), int(top)), (int(right), int(bottom)), (23, 230, 210), thickness=2)
 
+	cv.imshow('img', img)
+	if cv.waitKey(1) and 0xFF==ord('q'):
+		break
