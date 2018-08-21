@@ -44,8 +44,6 @@ while cap1.isOpened():
 						cv2.putText(image, label, (startX, y),cv2.FONT_HERSHEY_SIMPLEX, 0.5, COLORS[idx], 2)
 		j=j+1
 		text="Frame Count = "+str(j)
-		cv2.line(image,(0,284),(w,284),(0,0,255),2)
-		cv2.putText(image,text, (10,40),cv2.FONT_HERSHEY_SIMPLEX, 0.5, (0,255,255), 2)
 		cv2.imshow('crp',image)
 		if cv2.waitKey(1) and 0xFF==ord('q'):
 			break
