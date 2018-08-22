@@ -37,7 +37,7 @@ function sortTable(){
 function GenerateTable() {
       $.get("/api", function(data){
       var obj=JSON.parse(data);
-
+      console.log(obj);
       var node=document.getElementById("showData");
       while (node.hasChildNodes()) {
           node.removeChild(node.lastChild);
