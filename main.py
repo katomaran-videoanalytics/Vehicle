@@ -14,11 +14,11 @@ net = cv2.dnn.readNetFromCaffe("models/Car_Detect_Model/MobileNetSSD_deploy.prot
 cap1 = cv2.VideoCapture(0)
 cap2=cv2.VideoCapture("rtsp://admin:admin0864@121.6.207.205:8083/cam/realmonitor?channel=1&subtype=1")
 j=0
-while cap1.isOpened():
+while cap1.isOpened() and cap2.isOpened():
 	ret,image = cap1.read()
 	ret2,image1=cap2.read()
 
-	if ret==True and ret2==True:
+	if ret==True:
 	
 		(h, w) = image.shape[:2]
 		blob = cv2.dnn.blobFromImage(cv2.resize(image, (300, 300)), 0.007843, (300, 300), 127.5)
@@ -29,7 +29,7 @@ while cap1.isOpened():
 			confidence = detections[0, 0, i, 2]
 			if confidence > threshold:
 				idx = int(detections[0, 0, i, 1])
-				if CLASSES[idx]=="person":
+				if CLASSES[idx]=="car":
 					box = detections[0, 0, i, 3:7] * np.array([w, h, w, h])
 					g=(startX, startY, endX, endY) = box.astype("int")
 					center = (int((startX+endX)/2),endY)
