@@ -4,7 +4,7 @@ cvNet = cv.dnn.readNetFromTensorflow('models/PrivateHire_Model/frozen_inference_
 
 
 def private_detect(frame):
-	img = frame.read()
+	img = cv.imread(frame)
 	rows = img.shape[0]
 	cols = img.shape[1]
 	cvNet.setInput(cv.dnn.blobFromImage(img, 1.0/127.5, (300, 300), (127.5, 127.5, 127.5), swapRB=True, crop=False))
