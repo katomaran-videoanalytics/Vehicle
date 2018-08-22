@@ -1,4 +1,4 @@
-from private import private_detect
+from number import number_detect
 
-path="/home/katomaran/Desktop/20180620_190052.bmp"
-print(private_detect(path))
+path="/home/katomaran/Desktop/0000000310.png"
+print(number_detect(path))
