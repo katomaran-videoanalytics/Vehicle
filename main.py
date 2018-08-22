@@ -11,12 +11,10 @@ CLASSES = ["background", "aeroplane", "bicycle", "bird", "boat",
 COLORS = np.random.uniform(0, 255, size=(len(CLASSES), 3))
 net = cv2.dnn.readNetFromCaffe("models/Car_Detect_Model/MobileNetSSD_deploy.prototxt.txt", "models/Car_Detect_Model/MobileNetSSD_deploy.caffemodel")
 
-cap1 = cv2.VideoCapture(0)
 cap2=cv2.VideoCapture("rtsp://admin:admin0864@121.6.207.205:8083/cam/realmonitor?channel=1&subtype=1")
 j=0
 while True:
-	ret,image = cap1.read()
-	ret2,image1=cap2.read()
+	ret,image=cap2.read()
 
 	if ret==True:
 		if j%5==0:
@@ -33,9 +31,11 @@ while True:
 						box = detections[0, 0, i, 3:7] * np.array([w, h, w, h])
 						g=(startX, startY, endX, endY) = box.astype("int")
 						center = (int((startX+endX)/2),endY)
-						if center[1]>280:
-							cv2.imwrite("images/car.jpg",image1)
-							pri_results=private_detect(image1)
+						print(center)
+						if center[0]<380 and center[1]>250:
+							cv2.imwrite("images/car.jpg",image)
+							pri_results=private_detect("images/car.jpg")
+							print(pri_results)
 						label = "{}: {:.2f}%".format(CLASSES[idx], confidence * 100)
 						conf=confidence * 100
 						
@@ -45,7 +45,6 @@ while True:
 						cv2.putText(image, label, (startX, y),cv2.FONT_HERSHEY_SIMPLEX, 0.5, COLORS[idx], 2)
 		j=j+1
 		text="Frame Count = "+str(j)
-		cv2.imshow('vid1',image1)
 		cv2.imshow('vid2',image)
 		if cv2.waitKey(1) and 0xFF==ord('q'):
 			break
