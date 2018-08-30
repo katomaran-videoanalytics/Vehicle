@@ -6,7 +6,6 @@ from number import number_detect
 import re
 count=0
 count1=0
-count2=0
 CLASSES = ["background", "aeroplane", "bicycle", "bird", "boat",
 	"bottle", "bus", "car", "cat", "chair", "cow", "diningtable",
 	"dog", "horse", "motorbike", "person", "pottedplant", "sheep",
@@ -42,15 +41,13 @@ while True:
 							cv2.imwrite("images/car.jpg",image)
 							cv2.imwrite("images/incam.jpg",image2)
 							pri_results=private_detect("images/car.jpg")
-							if count2<5:
-								(stri,confin)=number_detect("images/incam.jpg")
+							(stri,confin)=number_detect("images/incam.jpg")
 							lis.append(pri_results)
 							#print(stri)
 							if stri is not None :
 								if re.search(r"([A-Z]{3})+(\d{3})",stri):
 									lis1.append(stri)
 									lis2.append(confin)
-									count2=count2+1
 							count=count+1
 						'''label = "{}: {:.2f}%".format(CLASSES[idx], confidence * 100)
 						conf=confidence * 100
@@ -79,7 +76,6 @@ while True:
 				del(lis1[:])
 				del(lis[:])
 				del(lis2[:])
-				count2=0
 				count=0
 				count1=0
 		j=j+1
