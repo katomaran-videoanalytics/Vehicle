@@ -16,10 +16,17 @@ CLASSES = ["background", "aeroplane", "bicycle", "bird", "boat",
 	"sofa", "train", "tvmonitor"]
 COLORS = np.random.uniform(0, 255, size=(len(CLASSES), 3))
 net = cv2.dnn.readNetFromCaffe("models/Car_Detect_Model/MobileNetSSD_deploy.prototxt.txt", "models/Car_Detect_Model/MobileNetSSD_deploy.caffemodel")
+#Main_Stream:
+
+cap1=WebcamVideoStream(src="rtsp://admin:admin0864@121.6.207.205:8081/").start()
+
+cap2=WebcamVideoStream(src="rtsp://admin:admin0864@121.6.207.205:8083/").start()
+
+''' Sub_Stream:
 cap1=WebcamVideoStream(src="rtsp://admin:admin0864@121.6.207.205:8081/cam/realmonitor?channel=1&subtype=1").start()
-print("cap1")
+
 cap2=WebcamVideoStream(src="rtsp://admin:admin0864@121.6.207.205:8083/cam/realmonitor?channel=1&subtype=1").start()
-print("cap2")
+'''
 lis=list()
 lis1=list()
 lis2=list()
@@ -52,7 +59,7 @@ while True:
 						lis1.append(score)
 				if center[1]>492 and len(lis)!=0 and len(lis1)!=0:
 					s = datetime.datetime.now().strftime('%H:%M:%S')
-					print('private_hire status:')
+					#print('private_hire status:')
 					private_type=True in lis2
 					img_path=lis[lis1.index(max(lis1))]
 					path='number_plate/image'+str(j)+'.jpg'
@@ -64,25 +71,25 @@ while True:
 					elif number_string[:2]=="SH":
 						veh_type="taxi"
 
-					print(number_string)
+					#print(number_string)
 					data ={"vehicle":{
 					"in_time":s,
 					"number_plate":number_string,
 					"vehicle_type":veh_type
 					}
 					}
-					print(data)
+					#print(data)
 					r = requests.post(url = API_ENDPOINT, json = data)
-					pastebin_url = r.text
-					print("The pastebin URL is:%s"%pastebin_url)
+					#pastebin_url = r.text
+					#print("The pastebin URL is:%s"%pastebin_url)
 					j=j+1
 					del(lis[:])
 					del(lis1[:])
 					del(lis2[:])
 					
-	cv2.imshow('vid1',image1)
-	cv2.imshow('vid2',image)
-	if cv2.waitKey(30) and 0xFF==ord('q'):
-		break
+	#cv2.imshow('vid1',image1)
+	#cv2.imshow('vid2',image)
+	#if cv2.waitKey(30) and 0xFF==ord('q'):
+	#	break
   
 

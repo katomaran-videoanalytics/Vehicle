@@ -15,7 +15,13 @@ CLASSES = ["background", "aeroplane", "bicycle", "bird", "boat",
 	"sofa", "train", "tvmonitor"]
 COLORS = np.random.uniform(0, 255, size=(len(CLASSES), 3))
 net = cv2.dnn.readNetFromCaffe("models/Car_Detect_Model/MobileNetSSD_deploy.prototxt.txt", "models/Car_Detect_Model/MobileNetSSD_deploy.caffemodel")
+#Main_Stream:
 cap1=WebcamVideoStream(src="rtsp://admin:admin0864@121.6.207.205:8082/").start() #cam/realmonitor?channel=1&subtype=1
+
+'''Substream:
+cap1=WebcamVideoStream(src="rtsp://admin:admin0864@121.6.207.205:8082/cam/realmonitor?channel=1&subtype=1").start() 
+'''
+
 j=0
 lis=list()
 lis1=list()
@@ -49,7 +55,7 @@ while True:
 					path='number_plate/image'+str(j)+'.jpg'
 					cv2.imwrite(path,img_path)
 					number_string=detect_text(path)
-					print(number_string)
+					#print(number_string)
 					data ={"vehicle":{
 					"out_time":s,
 					"number_plate":number_string,
@@ -59,8 +65,8 @@ while True:
 					del(lis[:])
 					del(lis1[:])
 
-	cv2.imshow('vid3',image)
-	if cv2.waitKey(30) and 0xFF==ord('q'):
-		break
+	#cv2.imshow('vid3',image)
+	#if cv2.waitKey(30) and 0xFF==ord('q'):
+	#	break
   
 
