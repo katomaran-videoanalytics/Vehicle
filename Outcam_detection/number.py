@@ -1,8 +1,6 @@
 import cv2 as cv
 import os
 import io
-import re
-import numpy as np
 
 cvNet = cv.dnn.readNetFromTensorflow('models/Outcam_model/frozen_inference_graph.pb', 'models/Outcam_model/outnum_model.pbtxt')
 

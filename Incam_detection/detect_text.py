@@ -1,8 +1,6 @@
-import cv2 as cv
 import os
 import io
 import re
-import numpy as np
 from google.cloud import vision_v1p3beta1 as vision
 
 

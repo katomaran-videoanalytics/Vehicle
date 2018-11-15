@@ -1,8 +1,6 @@
 import cv2 as cv
 import os
 import io
-import re
-import numpy as np
 
 cvNet = cv.dnn.readNetFromTensorflow('models/Number_plate_Model/frozen_inference_graph.pb', 'models/Number_plate_Model/NuPlate_model.pbtxt')
 
