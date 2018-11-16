@@ -1,6 +1,5 @@
 import numpy as np
 import cv2
-import os
 from imutils.video import WebcamVideoStream
 import requests
 import datetime
@@ -71,7 +70,7 @@ while True:
 					elif number_string[:2]=="SH":
 						veh_type="taxi"
 
-					#print(number_string)
+					print(number_string)
 					data ={"vehicle":{
 					"in_time":s,
 					"number_plate":number_string,
